@@ -1,6 +1,5 @@
 const { threads } = require('../models');
 
-// Create thread
 exports.create = async (req, res) => {
   try {
     const thread = await threads.create(req.body);
@@ -10,7 +9,6 @@ exports.create = async (req, res) => {
   }
 };
 
-// Get all threads
 exports.findAll = async (req, res) => {
   try {
     const allThreads = await threads.findAll();
@@ -20,7 +18,6 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// Get thread by id
 exports.findOne = async (req, res) => {
   try {
     const thread = await threads.findByPk(req.params.id);
@@ -33,7 +30,6 @@ exports.findOne = async (req, res) => {
   }
 };
 
-// Update thread
 exports.update = async (req, res) => {
   try {
     const thread = await threads.findByPk(req.params.id);
@@ -47,7 +43,6 @@ exports.update = async (req, res) => {
   }
 };
 
-// Delete thread
 exports.delete = async (req, res) => {
   try {
     const thread = await threads.findByPk(req.params.id);

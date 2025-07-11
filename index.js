@@ -2,6 +2,7 @@
  const db = require('./models');
  const userRoutes = require('./Routes/user.routes');
  const threadsRoutes = require('./Routes/threads.routes'); 
+ const komentarRoutes = require('./Routes/komentar.routes');
  const app = express();
 
  // Middleware untuk mem-parsing request body JSON
@@ -18,6 +19,7 @@
  // Mendaftarkan routes dengan prefiks
  app.use('/api/users', userRoutes);
  app.use('/api/threads', threadsRoutes);
+ app.use('/api/komentar', komentarRoutes);
 
  // Menghubungkan ke database dan memulai server);
  // db.sequelize.sync();
