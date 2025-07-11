@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "Yukino21!",
+    "password": "",
     "database": "eisd_sg1",
     "host": "localhost",
     "dialect": "postgres"

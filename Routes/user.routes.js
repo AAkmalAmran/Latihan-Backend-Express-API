@@ -1,5 +1,5 @@
 const express = require('express');
- const userController = require('../controllers/user.controllers');
+ const userController = require('../Controllers/user.controllers');
  const router = express.Router();
  router.post('/', userController.create);
  router.get('/', userController.findAll);

@@ -1,26 +1,29 @@
- // 1. Mengimpor modul express
  const express = require('express');
- const db = require('./models'); // Impor dari folder models
- // 2. Membuat instance dari aplikasi express
+ const db = require('./models');
+ const userRoutes = require('./Routes/user.routes');
+ const threadsRoutes = require('./Routes/threads.routes'); 
  const app = express();
- // 3. Mendefinisikan port untuk server
- // Menggunakan port dari environment variable jika ada, jika tidak, gunakan port 3000
- const port = process.env.PORT || 3000;
- // 4. Mendefinisikan route sederhana untuk root URL '/')
- app.get('/', (req, res) => {res.send('Hello World!');  
+
+ // Middleware untuk mem-parsing request body JSON
+ app.use(express.json());
+
+ // Middleware untuk mem-parsing request body URL-encoded
+ app.use(express.urlencoded({ extended: true }));
+
+ // Route sederhana untuk pengujian awal
+ app.get('/', (req, res) => {
+ res.json({ message: 'Selamat datang di API aplikasi.' });
  });
 
- // Uji koneksi database
- async function testDbConnection() {
- try {
- await db.sequelize.authenticate();
- console.log('Koneksi ke database berhasil terkoneksi.');
- } catch (error) {
- console.error('Tidak dapat terhubung ke database:', error);
- }
-}
+ // Mendaftarkan routes dengan prefiks
+ app.use('/api/users', userRoutes);
+ app.use('/api/threads', threadsRoutes);
 
-testDbConnection();
-app.listen(port, () => {
- console.log(`Server berjalan di http://localhost:${port}`);
- });
+ // Menghubungkan ke database dan memulai server);
+ // db.sequelize.sync();
+ // Sinkronisasi database (opsional, lebih baik menggunakan migrasi di produksi)
+
+ const PORT = process.env.PORT || 3000;
+ app.listen(PORT, () => {
+ console.log(`Server berjalan di port ${PORT}.`);
+ })
