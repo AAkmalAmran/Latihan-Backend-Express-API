@@ -1,8 +1,8 @@
  const express = require('express');
- const db = require('./models');
- const userRoutes = require('./Routes/user.routes');
- const threadsRoutes = require('./Routes/threads.routes'); 
- const komentarRoutes = require('./Routes/komentar.routes');
+ const db = require('./src/models');
+ const userRoutes = require('./src/Routes/user.routes');
+ const threadsRoutes = require('./src/Routes/threads.routes'); 
+ const komentarRoutes = require('./src/Routes/komentar.routes');
  const app = express();
 
  // Middleware untuk mem-parsing request body JSON
