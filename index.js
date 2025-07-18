@@ -1,5 +1,6 @@
  const express = require('express');
  const db = require('./src/models');
+ const authRoutes = require('./src/Routes/auth.routes');
  const userRoutes = require('./src/Routes/user.routes');
  const threadsRoutes = require('./src/Routes/threads.routes'); 
  const komentarRoutes = require('./src/Routes/komentar.routes');
@@ -17,6 +18,7 @@
  });
 
  // Mendaftarkan routes dengan prefiks
+ app.use('/api/auth', authRoutes);
  app.use('/api/users', userRoutes);
  app.use('/api/threads', threadsRoutes);
  app.use('/api/komentar', komentarRoutes);

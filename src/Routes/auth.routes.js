@@ -1,3 +1,7 @@
+const express = require("express");
+const router = express.Router();
+const authControllers = require("../Controllers/auth.controllers");
+
 const rateLimit = require('express-rate-limit');
 const loginLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // Jendela waktu 15 menit
@@ -7,4 +11,6 @@ const loginLimiter = rateLimit({
     legacyHeaders: false, // Nonaktifkan header X-RateLimit-* yang lama
 });
 
-router.post('/login', loginLimiter, authController.login);
+router.post('/login', loginLimiter, authControllers.login);
+
+module.exports = router;
