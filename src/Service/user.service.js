@@ -1,13 +1,19 @@
 const db = require('../models');
- const User = db.User; // Mengakses model User
- exports.createUser = async (userData) => {
- // Di sini bisa ditambahkan logika bisnis, seperti hashing password
- // atau validasi duplikasi email sebelum menyimpan.
- if (!userData.email ||!userData.name) {
- throw new Error("Email dan Nama tidak boleh kosong.");
- }
-  const newUser = await User.create(userData);
- return newUser;
+const User = db.User; // Mengakses model User
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+exports.createUser = async (userData) => {
+  const {name, email, password} = userData;
+
+  if (!email || !name) {
+    throw new Error("Email dan Nama tidak boleh kosong.");
+  }
+
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  const newUser = await User.create({ name, email, password: hashedPassword });
+
+  return { id: newUser.id, name: newUser.name, email: newUser.email };
  };
 
 exports.findAllUsers = async () => {
